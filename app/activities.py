@@ -8,14 +8,6 @@ import clickhouse_connect
 
 # model = SentenceTransformer("all-MiniLM-L6-v2")
 
-@activity.defn
-def download_video(url: str, out_path: str) -> str:
-    r = requests.get(url, stream=True)
-    r.raise_for_status()
-    with open(out_path, "wb") as f:
-        for chunk in r.iter_content(8192):
-            f.write(chunk)
-    return out_path
 
 
 @activity.defn
