@@ -1,0 +1,13 @@
+frame_00000.jpg: toilet, cup, toilet, toilet, cup, toilet, toilet, tvmonitor, cell phone, toilet, cup, toilet, cell phone, cell phone, cell phone, toilet, cup, toilet, cell phone, cell phone, cell phone, toilet, cup, toilet, cell phone, cell phone, cell phone
+frame_00001.jpg: cup, cup, cup, cup, cup, cup, cup, cup, cup, cell phone, cell phone, cup, cup, cup, cell phone, cell phone, cell phone, cup, cup, cup, cell phone, cell phone, cell phone, cup, cup, cup, cell phone, cell phone, cell phone
+frame_00002.jpg: cup, cup, cup, cup, cup, cup, cell phone, cup, cup, cup, cell phone, cell phone, cell phone, cup, cup, cup, cell phone, cell phone, cell phone, cup, cup, cup, cell phone, cell phone, cell phone
+frame_00003.jpg: 
+frame_00004.jpg: 
+frame_00005.jpg: 
+frame_00006.jpg: person, person, person
+frame_00007.jpg: person, person, person, person, person, person
+frame_00008.jpg: 
+frame_00009.jpg: 
+frame_00010.jpg: 
+frame_00011.jpg: kite, kite
+frame_00012.jpg: 

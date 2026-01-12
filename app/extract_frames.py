@@ -8,8 +8,10 @@ async def extract_frames(payload: dict) -> dict:
     # frames_dir = payload["frames_dir"]
     every_n_frames = payload.get("every_n_frames", 30)
     
-    frames_dir = 'frames_output'
-    os.makedirs(frames_dir, exist_ok=True)
+    frames_dir_folder = 'frames_output'
+    os.makedirs(frames_dir_folder, exist_ok=True)
+    frames_dir = os.path.join(os.getcwd(), frames_dir_folder)
+        
 
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
@@ -24,7 +26,7 @@ async def extract_frames(payload: dict) -> dict:
             break
 
         if frame_count % every_n_frames == 0:
-            frame_path = os.path.join(frames_dir, f"frame_{saved:05d}.jpg")
+            frame_path = os.path.join(frames_dir_folder, f"frame_{saved:05d}.jpg")
             cv2.imwrite(frame_path, frame)
             saved += 1
 

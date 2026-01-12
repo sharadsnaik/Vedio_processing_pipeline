@@ -16,24 +16,28 @@ import os
 path_ = os.path.join(f"/tmp", 'video_id.mp4')
 lancedb_path = os.path.join(os.getcwd(), "lancedb_OUTS")
 # vedio downlaoding workflow
+path_tes_ = os.path.join(os.getcwd(),"video_data//ff.mp4")
+print(path_tes_)
+
+
 @workflow.defn
 class VideoPipelineWorkflow:
 
     @workflow.run
     async def run(self, url: str,video_id):
-        # path = await workflow.execute_activity(
-        #     "download_video",
-        #     {
-        #         "url": url,
-        #         "video_id": video_id
+        path = await workflow.execute_activity(
+            "download_video",
+            {
+                "url": url,
+                "video_id": video_id
 
-        #     },
-        #     start_to_close_timeout=timedelta(minutes=2),
-        # )
-        path = "video_data\\ff.mp4"
-
-        # return path
-        frames = await workflow.execute_activity(
+            },
+            start_to_close_timeout=timedelta(minutes=2),
+        )
+        
+    
+        # # return path
+        frames_out = await workflow.execute_activity(
             "extract_frames",
             {
                 "video_path": path,
@@ -42,38 +46,32 @@ class VideoPipelineWorkflow:
             start_to_close_timeout=timedelta(minutes=5),
         )
 
-        # return {
-        #         "result": frames,
-        #         "output_dir": f"C:/temp/{video_id}_frames",
-        #         "every_n_frames": 30,
-        #     },
+        # return {"result": frames_out,"output_dir": f"C:/temp/{video_id}_frames", "every_n_frames": 30 },
 
 
         recognition_result = await workflow.execute_activity(
-          "recognize_frames",
+        #   "recognize_frames",
+        "detect_objects",
           {
-        "frames_dir": frames,
+        "frames_dir": frames_out,
             #   "output_txt": f"C:/temp/{video_id}_detections.txt",
               "lancedb_path": lancedb_path,
               
           },
           start_to_close_timeout=timedelta(minutes=10), )
-        return {
+        # return {
                
-               "recognition": recognition_result,
-        }
+        #        "recognition": recognition_result,
+        # }
 
 
 
-        # await workflow.execute_activity(
-        #     "index_events",
-        #     events,
-        #     start_to_close_timeout=timedelta(minutes=2),
-        # )
-
-        # paths =[{"timestamp": 1.2, "motion": 3.4}]
-
-    #     await workflow.execute_activity(
-    # "store_events",
-    # args=[video_id, paths],
-    # start_to_close_timeout=timedelta(minutes=2),
+        semantic_result = await workflow.execute_activity(
+           "caption_embeding_store",
+          {
+        "frames_dir": f"C:/temp/{video_id}_frames",
+        "detections": recognition_result,
+        "lancedb_uri": lancedb_path,  },
+        start_to_close_timeout=timedelta(minutes=10),
+        )
+        return semantic_result
