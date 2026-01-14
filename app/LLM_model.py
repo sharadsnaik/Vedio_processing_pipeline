@@ -67,7 +67,14 @@ Describe this image in one sentence.
     with open(results_path, "w") as f:
         json.dump(results, f, indent=2)
 
-    return {"results_file": results_path}
+    # return {"results_file": results_path}
+    return {
+        "video_id": payload["video_id"],
+        "frame_name": img_name,
+        "image_url": image_url,
+        "description": response.output_text,
+        "model": "Qwen/Qwen3-VL-30B-A3B-Instruct"
+    }
 
 
 

@@ -1,27 +1,11 @@
 import clickhouse_connect
+import os
 
-def connect_client():
+def get_clickhouse_client():
     return clickhouse_connect.get_client(
-        host="localhost",
-        port=8123,          # HTTP port (default)
-        username="default",
-        password="",
-        database="video_db",
+        host=os.getenv("CLICKHOUSE_HOST", "localhost"),
+        port=int(os.getenv("CLICKHOUSE_PORT", 8123)),
+        username=os.getenv("CLICKHOUSE_USER", "default"),
+        password=os.getenv("CLICKHOUSE_PASSWORD", ""),
+        database=os.getenv("CLICKHOUSE_DB", "video_pipeline")
     )
-    # client.command("""
-    #     CREATE TABLE IF NOT EXISTS video_metadata (
-    #         video_id String,
-    #         url String,
-    #         path String,
-    #         created_at DateTime DEFAULT now()
-    #     ) ENGINE = MergeTree
-    #     ORDER BY video_id
-    # """)
-
-    # client.insert(
-    #     "video_metadata",
-    #     [(video_id, url, path)],
-    #     column_names=["video_id", "url", "path"],
-    # )
-
-    # return "inserted"

@@ -1,9 +1,9 @@
 import asyncio
 from temporalio.client import Client
 from app.workerflow_ import VideoPipelineWorkflow
-import uuid
 
-workflow_id = f"video-{uuid.uuid4()}"
+
+workflow_id = "sample_test"
 
 async def run():
     client = await Client.connect("localhost:7233")
